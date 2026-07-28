@@ -7,6 +7,8 @@ const eventSchema = new Schema({
     price: { type: Number},
     capacity: { type: Number},
     status: { type: Boolean}
-})  
+ })  
 
-export const Event = model('event', eventSchema)
+const eventModel = model('event', eventSchema);
+
+export default eventModel;
