@@ -1,10 +1,11 @@
 import { Router } from 'express'
-import { createTicket, getTickets } from '../controllers/tickets.controllers.js'
+import { getAllTickets, getTicketById, purchaseTicket } from '../controllers/tickets.controllers.js'
 
 const router = Router()
 
-router.get('/', getTickets)
-router.post('/', createTicket)
+router.get('/', getAllTickets);
+router.get('/:tid', getTicketById);
+router.post('/:euid/:eid', purchaseTicket);
 
 export default router
 

@@ -1,4 +1,4 @@
-const getEvents = async (req, res) => {
+const getEvent = async (req, res) => {
     try {
         const events = await Event.find()
         res.json(events)
@@ -18,4 +18,10 @@ const createEvent = async (req, res) => {
     }
 }
 
-export { getEvents, createEvent }   
+const updateEvent = async (req, res) => { }
+
+const deleteEvent = async (req, res) => { }
+
+const getAll = async (req, res) => { }
+
+export { getEvent, createEvent, updateEvent, deleteEvent, getAll }   

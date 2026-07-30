@@ -5,11 +5,18 @@ import userRouter from './routers/user.routers.js';
 import eventRouter from './routers/event.routers.js';
 import ticketRouter from './routers/ticket.routers.js';
 import sessionRouter from './routers/session.routers.js';
+import { initializePassport } from './config/passport.js';
+import cookieParser from 'cookie-parser';
+import passport from 'passport';
 
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(env.COOKIE_SECRET));
+
+initializePassport();
+app.use(passport.initialize());
 
 // Rutas
 app.use('/api/users', userRouter)

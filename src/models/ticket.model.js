@@ -1,17 +1,9 @@
 import {Schema, Types, model } from 'mongoose'
 
 const ticketSchema = new Schema({
-    user: { type: Types.ObjectId, 
-            ref: 'user', 
-            required: true },
-    event: {    type: Types.ObjectId, 
-                ref: 'event', 
-                required: true },
-    purchaseDate: { type: Date, default: Date.now }
+    user:  { type: Types.ObjectId, ref: 'user'},
+    event: { type: Types.ObjectId, ref: 'event'}
 })
-
-export const Ticket = mongoose.model('ticket', ticketSchema)
-
 
 const ticketModel = model('ticket', ticketSchema);
 

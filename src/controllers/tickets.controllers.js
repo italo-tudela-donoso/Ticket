@@ -18,4 +18,15 @@ const createTicket = async (req, res) => {
     }
 }
 
-export { getTickets, createTicket }     
+const getAllTickets = async (req, res) => { }
+
+const updateTicket = async (req, res) => { }
+
+const getTicketById = async (req, res) => { }
+
+const purchaseTicket = async (req, res) => { }  
+
+export { getTickets, createTicket, getAllTickets, updateTicket, purchaseTicket, getTicketById }
+
+
+
