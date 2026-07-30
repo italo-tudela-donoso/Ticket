@@ -18,4 +18,4 @@ const createUser = async (req, res) => {
     }   
 }
 
-export { getUsers, createUser } 
+export default router;

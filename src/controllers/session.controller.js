@@ -22,7 +22,6 @@ export async function register(req, res, next) {
 
 export async function login(req, res, next) {
     try {
-
         const { email, password } = req.body;
         const user = await userModel.findOne({ email });
         if (isValidPassword(password, user.password)) {
@@ -31,11 +30,13 @@ export async function login(req, res, next) {
                 email: user.email,
                 role: user.role 
             }
+
+            const token = jwt.sign( sessionData, 'c13C13', { expiresIn: '1h' });
+            res.json({ token });
+            }
             
-            res.status(200).json(sessionData);
-            //const token = jwt.sign( sessionData, 'c13C13', { expiresIn: '1h' });
-            //res.json({ token });
-        } else {
+           // res.status(200).json(sessionData);
+        else {
             console.log("login NOT Valid Password");
             res.status(401).json({ error: 'Credenciales inválidas' });
         }
@@ -43,4 +44,12 @@ export async function login(req, res, next) {
         console.log("login Error catched:"+error.message);
         res.status(401).json({ error: error.message });
     }
+}
+
+export async function current(req, res, next) {
+    try {
+        res.status(200).json({ data: req.userJWT });
+    } catch (error) {
+        res.status(500).json({ error:error});
+    } 
 }
