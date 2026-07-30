@@ -1,5 +1,5 @@
 import userModel from '../models/user.model.js';
-import {jwt} from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 export async function userExists(req, res, next) {
     const { email } = req.body;

@@ -1,4 +1,4 @@
-const getUsers = async (req, res) => {
+export async function getUsers(req, res) {
     try {
         const users = await User.find()
         res.json(users)
@@ -7,7 +7,7 @@ const getUsers = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {
+export async function createUser(req, res) {
     try {
         const { name, email } = req.body  
         const newUser = new User({ name, email })
@@ -18,4 +18,4 @@ const createUser = async (req, res) => {
     }   
 }
 
-export default router;
+
