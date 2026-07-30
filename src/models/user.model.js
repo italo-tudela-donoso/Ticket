@@ -10,7 +10,7 @@ const userSchema = new Schema({
                     "Por favor ingrese un correo electrónico válido"
                 ]},
     password:  { type: String, required: true },
-    role:      { type: String, enum: ['user', 'admin'], default: 'user' },
+    role:      { type: String, enum: ['user', 'admin', 'organizer'], default: 'user' },
 })      
 
 const userModel = model('user', userSchema);

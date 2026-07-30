@@ -13,7 +13,7 @@ router.post('/login',
     passport.authenticate('login', { session: false , passReqToCallback: true   }),
     //login
     async (req, res, next) => {
-        res.cookie("jwt", req.user, {signed: true, httpOnly: true, maxAge: 3600000}).status(200).json(req.user ); 
+        res.cookie("jwt", req.user, {signed: true, httpOnly: true, maxAge: 3600000}).json({data: req.user}); 
         console.log(req.user);
     }
 );
