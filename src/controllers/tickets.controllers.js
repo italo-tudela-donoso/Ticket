@@ -1,32 +1,59 @@
-const getTickets = async (req, res) => {
+import { response } from "express"
+import { getAllTicketsService,    getMyTicketsService,    
+         getTicketByIdService,    purchaseTicketService,    
+         cancelTicketService 
+
+        } from "../services/ticket.service.js"
+
+export async function getAllTickets(req, res) {
     try {
-        const tickets = await Ticket.find()
-        res.json(tickets)
-    } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los tickets' })
+        res.status(200).json({data:"getAllTickets"})
+    }
+    catch {
+        res.status(500).json({error:error.toString()})
     }
 }
 
-const createTicket = async (req, res) => {
-    try {
-        const { name, price, eventId } = req.body
-        const newTicket = new Ticket({ name, price, eventId })
-        await newTicket.save()
-        res.status(201).json(newTicket)
-    } catch (error) {
-        res.status(500).json({ message: 'Error al crear el ticket' })
+export async function getTicketById(req, res) {
+    try{
+        res.status(200).json({data:"getTicketById"})
+    }
+    catch( error ){
+        res.status(500).json({error:error.toString()});
     }
 }
 
-const getAllTickets = async (req, res) => { }
+export async function getMyTickets(req, res) {
+    try{
+        res.status(200).json({data:"getMyTickets"})
+    }
+    catch( error ){
+        res.status(500).json({error:error.toString()});
+    }
+}
 
-const updateTicket = async (req, res) => { }
+export async function purchaseTicket(req, res) {
+    try{
+        const ticketCreado = await purchaseTicketService( req );
+         res.status(200).json({data:ticketCreado})
+    }
+    catch(error){
+        res.status(500).json({error:error.toString()});
+    }
+    
+}
 
-const getTicketById = async (req, res) => { }
+export async function cancelTicket(req, res) {
+    try{
+        res.status(200).json({data:"cancelTicket"})
+    }
+    catch( error ){
+        res.status(500).json({error:error.toString()})
+    }
+}
+    
 
-const purchaseTicket = async (req, res) => { }  
 
-export { getTickets, createTicket, getAllTickets, updateTicket, purchaseTicket, getTicketById }
 
 
 

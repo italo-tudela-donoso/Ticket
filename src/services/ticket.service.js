@@ -8,11 +8,11 @@ function generateTicketCode() {
     return( "TICKET" + Math.random().toString());
 }
 
-export async function getAllTicketService(req, res) {
+export async function getAllTicketsService(req, res) {
 
 }
 
-export async function gerMyTicketsService(req, res) {
+export async function getMyTicketsService(req, res) {
 
 }
     
@@ -38,7 +38,7 @@ export async function purchaseTicketService( req ) {
             code: generateTicketCode()
         }) ;
 
-        await enviarMail(user.email, 'Gracias por tu compra', `<h1> Tu ticket ${ticket.code}</h1>`, '')
+        enviarMail(user.email, 'Gracias por tu compra', `<h1> Tu ticket ${ticket.code}</h1>`, '')
         return ticket;
     }
     catch( error ) { throw error;     }
@@ -46,5 +46,5 @@ export async function purchaseTicketService( req ) {
 }
 
 export async function cancelTicketService(req) {
-    
+
 }

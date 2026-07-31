@@ -1,5 +1,7 @@
 import eventModel from '../models/event.model.js';
 import userModel from '../models/user.model.js';
+import { validateDate } from '../utils.js';
+
 
 export async function getAllService(rep) {
     const filter = {}
