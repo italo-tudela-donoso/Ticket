@@ -5,6 +5,7 @@ import userRouter from './routers/user.routers.js';
 import eventRouter from './routers/event.routers.js';
 import ticketRouter from './routers/ticket.routers.js';
 import sessionRouter from './routers/session.routers.js';
+import categoryRouter from './routers/category.routers.js'
 import { initializePassport } from './config/passport.js';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
@@ -19,10 +20,11 @@ initializePassport();
 app.use(passport.initialize());
 
 // Rutas
-app.use('/api/users', userRouter)
 app.use('/api/events', eventRouter)
+app.use('/api/users', userRouter)
 app.use('/api/tickets', ticketRouter)
 app.use('/api/sessions', sessionRouter)
+app.use('/api/categories', categoryRouter)
 
 app.listen(env.PORT, () => {
     connectDB().then (
