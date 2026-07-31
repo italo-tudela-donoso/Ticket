@@ -48,8 +48,6 @@ export async function loginCallback(username, password, done) {
             done(null, token);
         }else {
             done(null, false);
-
-            return done(null, false, { message: 'Usuario no encontrado' });
         }
         }catch (error) {
         done(error, false);

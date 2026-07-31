@@ -9,6 +9,7 @@ router.post('/register',
     passport.authenticate('register', { session: false, passReqToCallback: true }),
     register
 );
+
 router.post('/login', 
     passport.authenticate('login', { session: false , passReqToCallback: true   }),
     //login

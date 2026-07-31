@@ -1,26 +1,23 @@
 import { Router } from 'express'
-import { getEvent, createEvent, deleteEvent, getAll, updateEvent } from '../controllers/events.controllers.js'
+import { getEvent, createEvent, deleteEvent, getAll, updateEvent } from '../controllers/event.controllers.js'
 import { validToken, autorizedRoles } from '../middlewares/session.middlewares.js';
-import { validateAdminOrOwner } from '../middlewares/event.middlewares.js';
-
+import { validateAdminOrOwner, validateParam } from '../middlewares/event.middlewares.js';
 
 const router = Router()
 
+router.param('eid', validateParam);
+
 router.get('/', getAll)
-router.get('/', getEvent)
+router.get('/:eid', getEvent)
 
 router.use(validToken);
 
 router.post('/', autorizedRoles(['admin', 'organizer']), createEvent)
 router.put('/:eid', validateAdminOrOwner, updateEvent);
-router.delete('/:id', deleteEvent);
+router.delete('/:eid', deleteEvent);
 
 export default router;
 
-/*
-router.post('/:eid', createEvent)
-router.put('/:eid', updateEvent)
-router.delete('/:id', deleteEvent)
-*/
+
 
 

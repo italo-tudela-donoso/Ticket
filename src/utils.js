@@ -22,3 +22,7 @@ export function verifyToken(token) {
     return jwt.verify(token, env.JWT_SECRET);
 }
 
+export function validateDate(date) {
+    if (date < new Date()) throw new Error('Fecha ya pasada');
+}
+

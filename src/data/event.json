@@ -1,0 +1,32 @@
+[
+ {
+    "name": "Festival",
+    "date": "2026-08-15T19:00:00.000Z",
+    "place": "Movistar Arena",
+    "price": 85500,
+    "capacity": 35000,
+    "status": true,
+    "organizer": "64b0f1a9b2b5123456789a01",
+    "category": "Concert"
+  },
+  {
+    "name": "Tech Summit #2",
+    "date": "2026-09-10T09:00:00.000Z",
+    "place": "Convention Center",
+    "price": 120,
+    "capacity": 1000,
+    "status": true,
+    "organizer": "64b0f1a9b2b5123456789a02",
+    "category": "Conference"
+  },
+  {
+    "name": "Hamlet Play #3",
+    "date": "2026-08-20T20:00:00.000Z",
+    "place": "Broadway Theater",
+    "price": 45,
+    "capacity": 250,
+    "status": true,
+    "organizer": "64b0f1a9b2b5123456789a03",
+    "category": "Theater"
+  }
+]

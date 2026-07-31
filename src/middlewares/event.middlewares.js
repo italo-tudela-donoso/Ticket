@@ -1,5 +1,6 @@
 import eventModel from '../models/event.model.js';
 import userModel from '../models/user.model.js';    
+import { isValidObjectId } from 'mongoose';
 
 
 export async function validateAdminOrOwner(req, res, next) {
@@ -26,4 +27,17 @@ export async function validateAdminOrOwner(req, res, next) {
      catch (error) {
         res.status(500).json({ error:error.toString() });
     }      
+}
+
+export async function validateParam(req, res, next, value) {
+    if (!isValidObjectId(value)) {
+        next(new Error('el objectid no es valido'));
+    }
+    const event = await eventModel.findById(req.params.eid);
+    if (event==null) throw new Error('el evento no existe');
+    else {
+        req.event = event;
+        next();
+    }
+    
 }

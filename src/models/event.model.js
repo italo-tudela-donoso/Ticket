@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, Types, model } from 'mongoose'
 
 const eventSchema = new Schema({
     name:      { type: String, required: true , trim: true},
@@ -7,10 +7,9 @@ const eventSchema = new Schema({
     price:     { type: Number, required: true, min: 0 },
     capacity:  { type: Number, required: true, min: 0 },
     status:    { type: Boolean, default: true },
-    organizer: { type: Schema.Types.ObjectId, ref: 'user'}
+    organizer: { type: Schema.Types.ObjectId, ref: 'user'},
+    category:  { type: Types.ObjectId, ref: 'category'}
 
  })  
-
 const eventModel = model('event', eventSchema);
-
 export default eventModel;
