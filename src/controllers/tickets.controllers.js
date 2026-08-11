@@ -1,21 +1,65 @@
-const getTickets = async (req, res) => {
+import { response } from "express"
+import { getAllTicketsService,    
+         getMyTicketsService,    
+         getTicketByIdService,    
+         purchaseTicketService,    
+         cancelTicketService 
+
+        } from "../services/ticket.service.js"
+
+export async function getAllTickets(req, res) {
     try {
-        const tickets = await Ticket.find()
-        res.json(tickets)
-    } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los tickets' })
+        const tickets = await getAllTicketsService(req, res);
+        res.status(200).json({data:tickets})
+    }
+    catch {
+        res.status(500).json({error:error.toString()})
     }
 }
 
-const createTicket = async (req, res) => {
-    try {
-        const { name, price, eventId } = req.body
-        const newTicket = new Ticket({ name, price, eventId })
-        await newTicket.save()
-        res.status(201).json(newTicket)
-    } catch (error) {
-        res.status(500).json({ message: 'Error al crear el ticket' })
+export async function getTicketById(req, res) {
+    try{
+        const ticket = await getTicketByIdService(req, res);
+        res.status(200).json({data:ticket})
+    }
+    catch( error ){
+        res.status(500).json({error:error.toString()});
     }
 }
 
-export { getTickets, createTicket }     
+export async function getMyTickets(req, res) {
+    try{
+        const tickets = await getMyTicketsService(req);
+        res.status(200).json({data:tickets  })
+    }
+    catch( error ){
+        res.status(500).json({error:error.toString()});
+    }
+}
+
+export async function purchaseTicket(req, res) {
+    try{
+        const ticketCreado = await purchaseTicketService( req );
+         res.status(201).json({data:ticketCreado})
+    }
+    catch(error){
+        res.status(500).json({error:error.toString()});
+    }
+    
+}
+
+export async function cancelTicket(req, res) {
+    try{
+        const ticketCancelado = await cancelTicketService(req);
+        res.status(200).json({data:ticketCancelado})
+    }
+    catch( error ){
+        res.status(500).json({error:error.toString()})
+    }
+}
+    
+
+
+
+
+

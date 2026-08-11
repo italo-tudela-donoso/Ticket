@@ -6,5 +6,10 @@ export const env = {
     PORT: process.env.PORT || 3000,
     MONGO_URI: process.env.MONGO_DB || 'mongodb://localhost:27017/ticket',
     JWT_SECRET: process.env.JWT_SECRET || 'secret',
-    JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '1h'
+    JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '1h',
+    COOKIE_SECRET: process.env.COOKIE_SECRET || 'secret',
+    SMTP_HOST:process.env.SMTP_HOST,
+    SMTP_PORT:process.env.SMTP_PORT,
+    SMTP_USER:process.env.SMTP_USER,
+    SMTP_PASS:process.env.SMTP_PASS
 }
