@@ -7,7 +7,7 @@ const eventSchema = new Schema({
     price:     { type: Number, required: true, min: 0 },
     capacity:  { type: Number, required: true, min: 0 },
     status:    { type: Boolean, default: true },
-    organizer: { type: Schema.Types.ObjectId, ref: 'user'},
+    organizer: { type: Types.ObjectId, ref: 'user'},
     category:  { type: Types.ObjectId, ref: 'category'}
 
  })  

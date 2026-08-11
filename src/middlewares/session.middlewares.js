@@ -1,14 +1,20 @@
-import userModel from '../models/user.model.js';
+import { userRepository } from '../repository/index.js';
 import jwt from 'jsonwebtoken';
 import { verifyToken } from '../utils.js';
 import e from 'express';
 
 export async function userExists(req, res, next) {
-    const { email } = req.body;
-    const user = await userModel.findOne({ email });
-    if (user== null) res.status(401).json({ message: 'No existe Usuario' });
-    req.user = user;
-    next();
+    try {
+            const { email } = req.body;
+            const user = await userRepository.findUserByEmail(email);
+            if (!user)  {
+                return res.status(401).json({ message: 'Usuario no encontrado' });
+            }
+            req.user = user;
+            next();
+        } catch (error) {
+            res.status(500).json({ message: 'userExists' + error.message });    
+        }
 }
 
 export async function validToken(req, res, next) {
@@ -18,7 +24,7 @@ export async function validToken(req, res, next) {
            req.user = token;
            next();
        } catch (error) {
-           res.status(500).json({ error:error});
+           res.status(500).json({ message: 'validToken' + error.message });
        } 
     }
 
@@ -30,7 +36,7 @@ export function autorizedRoles ( roles = []) {
             }   
             next();
         } catch (error) {
-            res.status(500).json({ error:error});
+            res.status(500).json({ message: 'autorizedRoles' + error.message });
         }
     }
 }  

@@ -1,10 +1,13 @@
-import eventModel from '../models/event.model.js';
-import userModel from '../models/user.model.js';
+import EventDAO from '../models/MongoDao/EventDAO.js';
+import UserDAO from '../models/MongoDao/UserDAO.js';
+import { eventRepository } from '../repository/index.js';
+
 import { validateDate } from '../utils.js';
 
 
 export async function getAllService(rep) {
     const filter = {}
+
     if (req.query.category) {
         let category = req.query.category;
         category[0] = category[0].toUpperCase();
@@ -13,11 +16,10 @@ export async function getAllService(rep) {
     }
 
     if (req.query.place) {
-        let place = req.query.place;
-        place[0] = place[0].toUpperCase();
-        console.log(req.query.place);
-        filter.place = place;
+        filter.place = req.query.place;
     }
+
+    return await eventRepository.findAll(filter);
 
 }
 
@@ -26,27 +28,14 @@ export async function createEventService (req) {
 
     validateDate(date);
 
-    const user = await userModel.findOne({ email: req.user.email });    
-
-    const event = await eventModel.create({ 
-        name: name, 
-        date: date,
-        place: place, 
-        price: price, 
-        capacity: capacity, 
-        status: status, 
-        category: category,
-        organizer: user._id
-    });
-
-    return event;
+    return await eventRepository.createEvent(req.user.email, name, date, place, price, capacity, status, category);
+    
 }
 
 export async function updateEventService(req) {
-    const event = await eventModel.findById(req.params.eid);    
+    const event = await EventDAO.findById(req.params.eid);
     validateDate(event.date);
-    await eventModel.updateOne(req.body, {new: true});
-    await event.save();
+    await EventDAO.update(event._id, req.body);
     return event;
 }
 
@@ -58,7 +47,8 @@ export async function deleteEventService(req) {
 }
 
 export async function getEventIdService(req) {
-    const event = await eventModel.findById(req.params.eid).populate('organizer');
+    const event = await EventDAO.findById(req.params.eid);
+    event.populate('organizer');
     if (event == null) throw new Error('Evento no encontrado');
     else return event;
 }

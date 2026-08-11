@@ -34,9 +34,11 @@ export async function login(req, res, next) {
 }
 
 export async function current(req, res, next) {
+
     try {
-        res.status(200).json({ data: req.userJWT });
+        res.status(200).json({ user: req.user });
     } catch (error) {
-        res.status(500).json({ error:error});
-    } 
+        res.status(500).json({ error: error.message });
+    }   
+
 }

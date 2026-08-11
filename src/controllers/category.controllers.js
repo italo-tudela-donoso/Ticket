@@ -1,4 +1,4 @@
-import { getAllCategoryService, createCategoryService} from '../services/category_service.js';
+import { getAllCategoryService, createCategoryService} from '../services/category.service.js';
 
 export async function getAll(req, res) {
 

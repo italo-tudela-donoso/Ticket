@@ -1,11 +1,32 @@
-export async function getUsers(req, res) {
+import { getAllUsersService, getUserService, updateUserService } from '../services/user.service.js'
+
+export async function getAll(req, res) {
     try {
-        const users = await User.find()
-        res.json(users)
+        const users = await getAllUsersService(req, res);
+        
+        return res.status(200).json({
+            status: "success",
+            payload: users
+        });
+
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los usuarios' })
+        res.status(500).json({ status: 'error', error: error.message})
     }
 }
+
+export async function getUser(req, res) {
+    try {
+        const user = await getUserService(req, res);    
+
+        return res.status(200).json({
+            status: "success",
+            payload: user
+        }); 
+    } catch (error) {   
+        return res.status(500).json({ status: 'error', error: error.message});
+    }
+}
+
 
 export async function createUser(req, res) {
     try {
@@ -18,67 +39,16 @@ export async function createUser(req, res) {
     }   
 }
 
-export async function getUser(req, res) {
-console.log("Entró a getUsers");
-
+export async function updateUser(req, res) { 
     try {
-        console.log(
-            "Estado de MongoDB:",
-            mongoose.connection.readyState
-        );
-
-        if (mongoose.connection.readyState !== 1) {
-            return res.status(503).json({
-                status: "error",
-                error: "MongoDB no está conectado",
-                mongoState: mongoose.connection.readyState
-            });
-        }
-
-        const users = await userModel.find().lean();
-
-        console.log("Usuarios encontrados:", users.length);
-
+        const user = await updateUserService(req, res);
         return res.status(200).json({
             status: "success",
-            payload: users
+            payload: user
         });
-
     } catch (error) {
-        console.error("Error en getUsers:", error);
-
-        return res.status(500).json({
-            status: "error",
-            error: error.message
-        });
-    }
+        return res.status(500).json({ status: 'error', error: error.message});
+    }   
 }
 
-export async function updateUser(req, res) { }
-
-export async function getAll(req, res) { 
-     try {
-        console.log("Entró a getAll");
-
-        const users = await userModel
-            .find({})
-            .select("-password")
-            .lean();
-
-        console.log("Usuarios encontrados:", users.length);
-
-        return res.status(200).json({
-            status: "success",
-            payload: users
-        });
-
-    } catch (error) {
-        console.error("Error obteniendo usuarios:", error);
-
-        return res.status(500).json({
-            status: "error",
-            error: error.message
-        });
-    }
-}
 

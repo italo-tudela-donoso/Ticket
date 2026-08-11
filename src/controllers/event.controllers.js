@@ -1,5 +1,5 @@
-import { createEventService, deleteEventService, getAllService, getEventIdService, updateEventService } from "../services/event_service.js";
-
+import { createEventService, deleteEventService, getAllService, getEventIdService, updateEventService } from "../services/event.service.js";
+         
 export async function getAll(req, res) {
     try {
         const events = await getAllService(req);
@@ -23,7 +23,7 @@ export async function createEvent (req, res) {
         const event = await createEventService(req);
         res.status(201).json({ data: event });
     } catch (error) {
-        res.status(500).json({ error:error.toString() });
+        res.status(500).json({ error: error.toString() });
     }
 }
 
